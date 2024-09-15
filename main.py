@@ -5,12 +5,14 @@ def main():
     chars_dict = get_chars_dict(text)
     sorted_list = sort_chars_dict(chars_dict)
 
-    print(f"--- Begin report of books/frankenstein.txt ---")
+    print(f"--- Begin report of {book_path} ---")
     print(f"{num_words} words found in the document")
-    print(" ")
+    print()
+
     for char in sorted_list:
-        print(f"The \'{char["chr"]}\' character was found {char["num"]} times")
-        
+        if not char["chr"].isaplpha():
+          print(f"The '{char["chr"]}' character was found {char["num"]} times")
+
     print(f"--- End report ---")
 
 def get_book_text(path):
@@ -37,7 +39,6 @@ def sort_on(dict):
 def sort_chars_dict(dict):
     list = []
     for chr in dict:
-        if chr.isalpha():
           list.append({"chr": chr, "num": dict[chr]})
     list.sort(reverse=True, key=sort_on)
     return list
